@@ -1,0 +1,14 @@
+{
+  "name": "necosato-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "necosato 公開サイト（Cloudflare Pages Functions + D1 + R2、読み取り専用）",
+  "scripts": {
+    "dev": "wrangler pages dev . --d1=DB --r2=IMAGES",
+    "deploy": "wrangler pages deploy ."
+  },
+  "devDependencies": {
+    "wrangler": "^3.90.0",
+    "@cloudflare/workers-types": "^4.20250101.0"
+  }
+}

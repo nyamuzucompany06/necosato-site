@@ -1,0 +1,14 @@
+name = "necosato-site"
+compatibility_date = "2026-09-01"
+pages_build_output_dir = "."
+
+# 重要: necosato-admin/wrangler.toml と必ず同じ database_id / bucket_name にしてください。
+# （別のDB・バケットを指してしまうと、管理画面で登録した猫が公開サイトに反映されません）
+[[d1_databases]]
+binding = "DB"
+database_name = "necosato-db"
+database_id = "0961cf07-3054-419d-a067-36192f13905e"
+
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "necosato-images"
