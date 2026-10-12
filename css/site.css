@@ -126,13 +126,14 @@
   .filter-select-group select{border:1px solid rgba(56,39,30,0.2);background:var(--white);border-radius:20px;padding:6px 14px;font-size:15px;color:var(--ink);}
   .cats-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;}
   .cat-card{border-radius:var(--radius-lg);overflow:hidden;box-shadow:0 6px 20px rgba(56,39,30,0.07);border:4px solid var(--orange);background:var(--white);}
-  .cat-card-image{width:100%;height:auto;display:block;-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none;}
+  .cat-card-image{width:100%;aspect-ratio:700/494;object-fit:cover;object-position:center;display:block;cursor:pointer;-webkit-user-drag:none;user-select:none;-webkit-touch-callout:none;}
 
-  /* ---------- CAT PHOTO LONG-PRESS ZOOM ---------- */
+  /* ---------- CAT PHOTO TAP ZOOM ---------- */
   .cat-zoom-overlay{position:fixed;inset:0;background:rgba(20,12,8,0.78);display:flex;align-items:center;justify-content:center;z-index:500;padding:24px;opacity:0;pointer-events:none;transition:opacity .18s ease;}
   .cat-zoom-overlay.show{opacity:1;pointer-events:auto;}
-  .cat-zoom-img{max-width:92vw;max-height:88vh;border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,0.45);object-fit:contain;}
-  .cat-zoom-close{position:fixed;top:18px;right:18px;width:38px;height:38px;border-radius:50%;border:none;background:rgba(255,255,255,0.9);color:var(--ink);font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,0.25);}
+  .cat-zoom-frame{position:relative;display:inline-block;max-width:92vw;max-height:88vh;line-height:0;}
+  .cat-zoom-img{display:block;max-width:92vw;max-height:88vh;border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,0.45);object-fit:contain;}
+  .cat-zoom-back{position:absolute;left:0;right:0;top:0;width:100%;height:38px;border:none;background:rgba(20,12,8,0.6);color:#fff;font-size:13.5px;font-weight:700;letter-spacing:.06em;border-radius:18px 18px 0 0;cursor:pointer;}
   .cat-card .cat-photo-wrap{position:relative;}
   .cat-card img.cat-photo{width:100%;height:230px;object-fit:cover;border-bottom:5px solid var(--orange);}
   .cat-status-badge{position:absolute;top:12px;left:12px;background:var(--orange);color:var(--white);font-size:12.5px;font-weight:700;padding:4px 12px;border-radius:20px;box-shadow:0 2px 6px rgba(0,0,0,0.15);}

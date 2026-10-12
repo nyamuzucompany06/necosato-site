@@ -361,7 +361,7 @@ function bindEvents(){
 }
 
 /* =========================================================
-   CAT PHOTO LONG-PRESS ZOOM (Instagram風プレビュー)
+   CAT PHOTO TAP ZOOM (タップで拡大 / 「戻る」バーで閉じる)
 ========================================================= */
 let catZoomOverlay = null;
 
@@ -369,9 +369,14 @@ function ensureCatZoomOverlay(){
   if(catZoomOverlay) return catZoomOverlay;
   catZoomOverlay = document.createElement("div");
   catZoomOverlay.className = "cat-zoom-overlay";
-  catZoomOverlay.innerHTML = `<button type="button" class="cat-zoom-close" aria-label="閉じる">×</button><img class="cat-zoom-img" alt="">`;
+  catZoomOverlay.innerHTML = `
+    <div class="cat-zoom-frame">
+      <img class="cat-zoom-img" alt="">
+      <button type="button" class="cat-zoom-back">戻る</button>
+    </div>`;
   document.body.appendChild(catZoomOverlay);
-  catZoomOverlay.querySelector(".cat-zoom-close").addEventListener("click", (e)=>{ e.stopPropagation(); hideCatZoom(); });
+  catZoomOverlay.querySelector(".cat-zoom-back").addEventListener("click", (e)=>{ e.stopPropagation(); hideCatZoom(); });
+  catZoomOverlay.addEventListener("click", (e)=>{ if(e.target === catZoomOverlay) hideCatZoom(); });
   return catZoomOverlay;
 }
 
@@ -389,30 +394,8 @@ function hideCatZoom(){
 
 function bindCatZoom(){
   document.querySelectorAll(".cat-card-image").forEach(img=>{
-    let pressTimer = null;
-    let zoomed = false;
-    const start = (e)=>{
-      zoomed = false;
-      clearTimeout(pressTimer);
-      pressTimer = setTimeout(()=>{
-        zoomed = true;
-        showCatZoom(img.src, img.alt);
-      }, 350);
-    };
-    const stop = ()=>{
-      clearTimeout(pressTimer);
-      if(zoomed) hideCatZoom();
-      zoomed = false;
-    };
-    img.addEventListener("pointerdown", start);
-    img.addEventListener("pointerup", stop);
-    img.addEventListener("pointerleave", stop);
-    img.addEventListener("pointercancel", stop);
-    img.addEventListener("contextmenu", (e)=>{ if(zoomed) e.preventDefault(); });
+    img.addEventListener("click", ()=>{ showCatZoom(img.src, img.alt); });
   });
-  // 拡大表示中に画面のどこを触っても閉じる
-  const overlay = ensureCatZoomOverlay();
-  overlay.addEventListener("pointerdown", hideCatZoom);
 }
 
 /* =========================================================
